@@ -39,7 +39,7 @@ scene.add(cube)
 
 let isRed = true;
 function onSelectStart(event){
-    cube.material.color = isRed ? cube.setColor('blue') : cube.setColor('red');
+    cube.material.color = isRed ? cube.material.color.set('blue') : cube.material.color.set('red');
     isRed = !isRed
 
 }

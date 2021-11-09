@@ -33,12 +33,13 @@ scene.add(new THREE.AxesHelper())
 const light = new THREE.AmbientLight( 0xFFFFFF );
 scene.add(light);
 
-let cube = new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshBasicMaterial({color: 'red'}))
+var cube = new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshBasicMaterial({color: 'red'}))
+cube.position.z -= 3;
 scene.add(cube)
 
 let isRed = true;
 function onSelectStart(event){
-    cube.material.color = isRed ? 'blue' : 'red';
+    cube.material.color = isRed ? cube.setColor('blue') : cube.setColor('red');
     isRed = !isRed
 
 }

@@ -33,6 +33,18 @@ scene.add(new THREE.AxesHelper())
 const light = new THREE.AmbientLight( 0xFFFFFF );
 scene.add(light);
 
+let cube = new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshBasicMaterial({color: 'red'}))
+scene.add(cube)
+
+let isRed = true;
+function onSelectStart(event){
+    cube.material.color = isRed ? 'blue' : 'red';
+    isRed = !isRed
+
+}
+
+
+
 //grid floorplane
 const geometry = new THREE.PlaneGeometry( 100, 100 );
 const horizontalGridMaterial = new THREE.ShaderMaterial({
@@ -67,6 +79,8 @@ scene.add(camera);
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 
+
+
 /**
  * Renderer
  */
@@ -78,13 +92,18 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.xr.enabled = true;
 document.body.appendChild( VRButton.createButton( renderer ) );
 
+
+
+
+
+
 controller1 = renderer.xr.getController( 0 );
-// controller1.addEventListener( 'selectstart', onSelectStart );
+controller1.addEventListener( 'selectstart', onSelectStart );
 // controller1.addEventListener( 'selectend', onSelectEnd );
 scene.add( controller1 );
 
 controller2 = renderer.xr.getController( 1 );
-// controller2.addEventListener( 'selectstart', onSelectStart );
+controller2.addEventListener( 'selectstart', onSelectStart );
 // controller2.addEventListener( 'selectend', onSelectEnd );
 scene.add( controller2 );
 
